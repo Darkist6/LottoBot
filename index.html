@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Connect Wallet</title>
+  <script src="https://unpkg.com/@tonconnect/sdk"></script>
+</head>
+<body>
+  <h2>🎟 Connect Your TON Wallet</h2>
+  <div id="connect"></div>
+
+  <script type="module">
+    import { TonConnectUI } from "https://unpkg.com/@tonconnect/ui@latest?module";
+
+    const tonConnectUI = new TonConnectUI({
+      manifestUrl: 'https://yourdomain.com/tonconnect-manifest.json',
+      buttonRootId: 'connect',
+    });
+
+    tonConnectUI.uiOptions = {
+      language: 'en',
+    };
+
+    tonConnectUI.onStatusChange(wallet => {
+      if (wallet) {
+        alert(`Connected: ${wallet.account.address}`);
+        // TODO: Send this address to your Telegram bot via API or webhook
+      }
+    });
+  </script>
+</body>
+</html>
